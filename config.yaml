@@ -1,0 +1,40 @@
+start_date: "2020-01-01"
+end_date: null  # Use today's date when null
+output_dir: "data"
+
+tickers:
+  nasdaq_list_url: "https://ftp.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt"
+  top_n: 50
+  market_cap_providers:
+    - fmp
+    - yfinance
+  request_pause_seconds: 0.3
+
+providers:
+  fmp:
+    base_url: "https://financialmodelingprep.com/api/v3"
+    api_key_env: "FMP_API_KEY"
+    request_pause_seconds: 0.25
+    income_endpoint: "income-statement"
+    balance_endpoint: "balance-sheet-statement"
+    profile_endpoint: "profile"
+    quote_endpoint: "quote"
+  yfinance:
+    request_pause_seconds: 0.2
+
+fundamentals:
+  providers:
+    - fmp
+    - yfinance
+  fields:
+    revenue: "revenue"
+    netIncome: "netIncome"
+    operatingIncome: "operatingIncome"
+    grossProfit: "grossProfit"
+    eps: "eps"
+    totalAssets: "totalAssets"
+    totalLiabilities: "totalLiabilities"
+
+prices:
+  auto_adjust: true
+  interval: "1d"
